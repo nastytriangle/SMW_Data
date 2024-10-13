@@ -24,8 +24,8 @@ namespace SMW_Data.View
             ComboBoxFontTitle.ItemsSource = sortedFonts;
             ComboBoxFontAuthor.ItemsSource = sortedFonts;
 
-            FontFamily CurrentFontTitle = mainWindow.CurrentFontTitle;
-            FontFamily CurrentFontAuthor = mainWindow.CurrentFontAuthor;
+            FontFamily CurrentFontTitle = mainWindow.Label_Hack.FontFamily;
+            FontFamily CurrentFontAuthor = mainWindow.Label_Creator.FontFamily;
 
             ComboBoxFontTitle.SelectedItem = sortedFonts.FirstOrDefault(f => f.Source == CurrentFontTitle.Source);
             ComboBoxFontAuthor.SelectedItem = sortedFonts.FirstOrDefault(f => f.Source == CurrentFontAuthor.Source);

@@ -24,7 +24,7 @@ namespace SMW_Data.View
             ChangeTextColor = Brushes.White;
 
             // Pull in current Background Color
-            SolidColorBrush MainBackgroundColor = mainWindow.CurrentBackgroundColor;
+            SolidColorBrush MainBackgroundColor = (SolidColorBrush)mainWindow.GridMain.Background;
             Color color1 = MainBackgroundColor.Color;
             string CurrentBackgroundHexColor = ColorToHexString2(color1);
             TextBoxBackgroundColor.Text = CurrentBackgroundHexColor;
@@ -35,7 +35,7 @@ namespace SMW_Data.View
             NewBackgroundColor = hexColorBrush1;
 
             // Pull in current Text Color
-            SolidColorBrush MainTextColor = mainWindow.CurrentTextColor;
+            SolidColorBrush MainTextColor = (SolidColorBrush)mainWindow.Label_LevelDeathCount.Foreground;
             Color color2 = MainTextColor.Color;
             string CurrentTextHexColor = ColorToHexString2(color2);
             TextBoxTextColor.Text = CurrentTextHexColor;

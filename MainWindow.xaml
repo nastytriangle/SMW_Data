@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SMW_Data"
         mc:Ignorable="d"
-        Title="SMW Data" Height="750" Width="680" FontSize="24">
+        Title="SMW Data" Height="750" Width="680" FontSize="24"
+ >
     <Window.Resources>
         <!-- Style for the button -->
         <Style x:Key="NoHoverButtonStyle" TargetType="Button">
@@ -51,9 +52,9 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Grid.Row="1" Header="Save/Load" FontSize="16">
-                    <MenuItem Header="Save Data" Click="MenuItem_Click_Save">
+                    <MenuItem Header="Save Hack Data" Click="MenuItem_Click_Save_Hack">
                     </MenuItem>
-                    <MenuItem Header="Load Data" Click="MenuItem_Click_Load">
+                    <MenuItem Header="Load Hack Data" Click="MenuItem_Click_Load_Hack">
                     </MenuItem>
                     <MenuItem Header="Clear Data" Click="MenuItem_Click_Clear">
                     </MenuItem>
@@ -61,19 +62,19 @@
             </Menu>
         </Grid>
         <!--Main Window-->
-        <Grid x:Name="GridHackName" Grid.Row="1" Background="#FF463F3F" Margin="0,-1,0,0">
+        <Grid x:Name="GridHackName" Grid.Row="1" Background="Transparent" Margin="0,-1,0,0">
             <!--Hack Name-->
             <Viewbox x:Name="Viewbox_Hack" HorizontalAlignment="Center" Margin="10,0,10,0" VerticalAlignment="Bottom" Height="80">
-                <Label x:Name="Label_Hack" Content="Hack Name" FontSize="72" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Bottom"/>
+                <Label x:Name="Label_Hack" Content="Hack Name" FontSize="72" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Bottom" />
             </Viewbox>
         </Grid>
-        <Grid x:Name="GridCreators" Grid.Row="2" Background="#FF463F3F" Margin="0,-1,0,0">
+        <Grid x:Name="GridCreators" Grid.Row="2" Background="Transparent" Margin="0,-1,0,0">
             <!--Creator(s)-->
             <Viewbox x:Name="Viewbox_Creator" HorizontalAlignment="Center" Margin="10,0,10,0" VerticalAlignment="Top" Height="60">
                 <Label x:Name="Label_Creator" Content="By: Creator(s)" FontSize="64" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top"/>
             </Viewbox>
         </Grid>
-        <Grid x:Name="GridMain" Grid.Row="3" Background="#FF463F3F">
+        <Grid x:Name="GridMain" Grid.Row="3" Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="73*"/>
                 <RowDefinition Height="32*"/>
@@ -103,17 +104,17 @@
             <TextBlock x:Name="TextBlock_ExitCountCurrent" HorizontalAlignment="Left" Margin="125,138,0,0" TextWrapping="Wrap" Text="??" VerticalAlignment="Top" Height="49" Width="58" FontSize="36" FontWeight="Bold" Foreground="White" TextAlignment="Right" Grid.RowSpan="2"/>
             <TextBlock x:Name="TextBlock_ExitCountSlash" HorizontalAlignment="Left" Margin="165,135,0,0" TextWrapping="Wrap" Text="/" VerticalAlignment="Top" Height="49" Width="62" FontSize="36" FontWeight="Bold" Foreground="White" TextAlignment="Center" Grid.RowSpan="2"/>
             <TextBlock x:Name="TextBlock_ExitCountTotal" HorizontalAlignment="Left" Margin="209,138,0,0" TextWrapping="Wrap" Text="??" VerticalAlignment="Top" Height="50" Width="57" FontSize="36" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.505,0.757" Grid.RowSpan="2"/>
-            <TextBlock x:Name="TextBlock_SwitchCount" HorizontalAlignment="Left" Margin="132,32,0,0" TextWrapping="Wrap" Text="+0" VerticalAlignment="Top" Height="27" Width="51" FontSize="20" FontWeight="Bold" Foreground="White" TextAlignment="Right" Visibility="Visible" Grid.Row="1"/>
+            <TextBlock x:Name="TextBlock_SwitchCount" HorizontalAlignment="Left" Margin="132,32,0,0" TextWrapping="Wrap" Text="+0" VerticalAlignment="Top" Height="27" Width="51" FontSize="20" FontWeight="Bold" Foreground="White" TextAlignment="Right" Visibility="Hidden" Grid.Row="1"/>
         </Grid>
         <Grid x:Name="GridData" Grid.Row="4" Background="#FF463F3F">
             <!--Level Death Counts-->
-            <TextBox x:Name="TextBox_LevelDeaths" HorizontalAlignment="Left" Margin="451,12,0,0" Text="0" VerticalAlignment="Top" Width="83" FontSize="14" Height="23" TextAlignment="Center" MaxLines="1" MaxLength="6" PreviewTextInput="TextBox_LevelDeaths_PreviewTextInput"/>
+            <TextBox x:Name="TextBox_LevelDeaths" GotFocus="txtBlankIfZeroFocus"  HorizontalAlignment="Left" Margin="451,12,0,0" Text="0" VerticalAlignment="Top" Width="83" FontSize="14" Height="23" TextAlignment="Center" MaxLines="1" MaxLength="6" PreviewTextInput="PreviewTextInt"/>
             <Button x:Name="Button_SetLevelDeaths" Content="   Set Level&#xA;Death Count" HorizontalAlignment="Left" Margin="541,12,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Click="Button_SetLevel_Click" Width="92" Height="52"/>
-            <Button x:Name="ButtonLevelPlus" Content="+" HorizontalAlignment="Left" Margin="482,41,0,0" VerticalAlignment="Top" Height="23" Width="22" FontSize="12" FontWeight="Bold" Click="ButtonLevelPlus_Click"/>
+            <Button x:Name="ButtonLevelPlus" Content="+" HorizontalAlignment="Left" Margin="482,41,0,0" VerticalAlignment="Top" Height="23" Width="22" FontSize="12" FontWeight="Bold" Click="ButtonLevelPlus_Click" CommandParameter=""/>
             <Button x:Name="ButtonLevelMinus" Content="-" HorizontalAlignment="Left" Margin="451,41,0,0" VerticalAlignment="Top" Height="23" Width="24" FontWeight="Bold" FontSize="12" Click="ButtonLevelMinus_Click"/>
             <Button x:Name="ButtonLevelZero" Content="0" HorizontalAlignment="Left" Margin="512,41,0,0" VerticalAlignment="Top" Height="23" Width="22" FontSize="12" FontWeight="Bold" Click="ButtonLevelZero_Click"/>
             <!--Total Death Counts-->
-            <TextBox x:Name="TextBox_TotalDeaths" HorizontalAlignment="Left" Margin="451,81,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="83" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="6" PreviewTextInput="TextBox_TotalDeaths_PreviewTextInput"/>
+            <TextBox x:Name="TextBox_TotalDeaths" GotFocus="txtBlankIfZeroFocus" HorizontalAlignment="Left" Margin="451,81,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="83" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="6" PreviewTextInput="PreviewTextInt"/>
             <Button x:Name="Button_SetTotalDeaths" Content="   Set Total&#xA;Death Count" HorizontalAlignment="Left" Margin="541,81,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Click="Button_SetTotal_Click" Width="92" Height="55"/>
             <Button x:Name="ButtonTotalPlus" Content="+" HorizontalAlignment="Left" Margin="482,113,0,0" VerticalAlignment="Top" Height="23" Width="23" FontSize="12" FontWeight="Bold" Click="ButtonTotalPlus_Click"/>
             <Button x:Name="ButtonTotalMinus" Content="-" HorizontalAlignment="Left" Margin="451,113,0,0" VerticalAlignment="Top" Height="23" Width="23" FontWeight="Bold" FontSize="12" Click="ButtonTotalMinus_Click"/>
@@ -121,52 +122,57 @@
             <!--Level Time-->
             <Label x:Name="Label_TimeUnits" Content=" HRS : MIN : SEC . ms " HorizontalAlignment="Left" Margin="68,80,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="192" Foreground="White"/>
             <Label x:Name="Label_Level" Content="Level" HorizontalAlignment="Left" Margin="3,101,0,0" VerticalAlignment="Top" FontSize="18" Height="38" Width="74" HorizontalContentAlignment="Center" Foreground="White" FontWeight="Bold" FontStyle="Italic"/>
-            <TextBox x:Name="TextBox_LevelHours" HorizontalAlignment="Left" Margin="68,108,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="38" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="4" PreviewTextInput="TextBox_LevelHours_PreviewTextInput" GotFocus="TextBox_LevelHours_GotFocus" LostFocus="TextBox_LevelHours_LostFocus"/>
-            <TextBox x:Name="TextBox_LevelMinutes" HorizontalAlignment="Left" Margin="115,108,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="24" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="2" PreviewTextInput="TextBox_LevelMinutes_PreviewTextInput" GotFocus="TextBox_LevelMinutes_GotFocus" LostFocus="TextBox_LevelMinutes_LostFocus"/>
-            <TextBox x:Name="TextBox_LevelSeconds" HorizontalAlignment="Left" Margin="149,108,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="24" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="2" PreviewTextInput="TextBox_LevelSeconds_PreviewTextInput" GotFocus="TextBox_LevelSeconds_GotFocus" LostFocus="TextBox_LevelSeconds_LostFocus"/>
-            <TextBox x:Name="TextBox_LevelMilliseconds" HorizontalAlignment="Left" Margin="182,108,0,0" TextWrapping="Wrap" Text="000" VerticalAlignment="Top" Width="32" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="3" PreviewTextInput="TextBox_LevelMilliseconds_PreviewTextInput" GotFocus="TextBox_LevelMilliseconds_GotFocus" LostFocus="TextBox_LevelMilliseconds_LostFocus"/>
+            <TextBox x:Name="TextBox_LevelHours" HorizontalAlignment="Left" Margin="68,108,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="38" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="4" PreviewTextInput="PreviewTextInt" GotFocus="txtBlankIfZeroFocus" LostFocus="txtLostFocusOneZero"/>
+            <TextBox x:Name="TextBox_LevelMinutes" HorizontalAlignment="Left" Margin="115,108,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="24" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="2" PreviewTextInput="PreviewTextInt" GotFocus="txtBlankIfZeroFocus" LostFocus="txtLostFocusTwoZeroes"/>
+            <TextBox x:Name="TextBox_LevelSeconds" HorizontalAlignment="Left" Margin="149,108,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="24" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="2" PreviewTextInput="PreviewTextInt" GotFocus="txtBlankIfZeroFocus" LostFocus="txtLostFocusTwoZeroes"/>
+            <TextBox x:Name="TextBox_LevelMilliseconds" HorizontalAlignment="Left" Margin="182,108,0,0" TextWrapping="Wrap" Text="000" VerticalAlignment="Top" Width="32" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="3" PreviewTextInput="PreviewTextInt" GotFocus="txtBlankIfZeroFocus" LostFocus="txtLostFocusThreeZeroes"/>
             <Button x:Name="Button_TimersSetLevel" Content="Set" HorizontalAlignment="Left" Margin="224,108,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Click="Button_TimersSetLevel_Click" Width="53" Height="22"/>
             <Button x:Name="Button_TimerResetLevel" Content="Reset" HorizontalAlignment="Left" Margin="288,108,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Click="Button_TimerResetLevel_Click" Width="59" Height="22" RenderTransformOrigin="0.501,1.315"/>
             <!--Last Level Time-->
             <Label x:Name="Label_LastLevel" Content="Last" HorizontalAlignment="Left" Margin="8,131,0,0" VerticalAlignment="Top" FontSize="18" Height="38" Width="74" HorizontalContentAlignment="Center" Foreground="White" FontWeight="Bold" FontStyle="Italic"/>
-            <TextBox x:Name="TextBox_LastLevelHours" HorizontalAlignment="Left" Margin="68,139,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="38" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="4" PreviewTextInput="TextBox_LastLevelHours_PreviewTextInput" GotFocus="TextBox_LastLevelHours_GotFocus" LostFocus="TextBox_LastLevelHours_LostFocus"/>
-            <TextBox x:Name="TextBox_LastLevelMinutes" HorizontalAlignment="Left" Margin="115,139,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="24" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="2" PreviewTextInput="TextBox_LastLevelMinutes_PreviewTextInput" GotFocus="TextBox_LastLevelMinutes_GotFocus" LostFocus="TextBox_LastLevelMinutes_LostFocus"/>
-            <TextBox x:Name="TextBox_LastLevelSeconds" HorizontalAlignment="Left" Margin="149,139,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="24" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="2" PreviewTextInput="TextBox_LastLevelSeconds_PreviewTextInput" GotFocus="TextBox_LastLevelSeconds_GotFocus" LostFocus="TextBox_LastLevelSeconds_LostFocus"/>
-            <TextBox x:Name="TextBox_LastLevelMilliseconds" HorizontalAlignment="Left" Margin="182,139,0,0" TextWrapping="Wrap" Text="000" VerticalAlignment="Top" Width="32" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="3" PreviewTextInput="TextBox_LastLevelMilliseconds_PreviewTextInput" GotFocus="TextBox_LastLevelMilliseconds_GotFocus" LostFocus="TextBox_LastLevelMilliseconds_LostFocus"/>
+            <TextBox x:Name="TextBox_LastLevelHours" HorizontalAlignment="Left" Margin="68,139,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="38" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="4" PreviewTextInput="PreviewTextInt" GotFocus="txtBlankIfZeroFocus" LostFocus="txtLostFocusOneZero"/>
+            <TextBox x:Name="TextBox_LastLevelMinutes" HorizontalAlignment="Left" Margin="115,139,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="24" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="2" PreviewTextInput="PreviewTextInt" GotFocus="txtBlankIfZeroFocus" LostFocus="txtLostFocusTwoZeroes"/>
+            <TextBox x:Name="TextBox_LastLevelSeconds" HorizontalAlignment="Left" Margin="149,139,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="24" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="2" PreviewTextInput="PreviewTextInt" GotFocus="txtBlankIfZeroFocus" LostFocus="txtLostFocusTwoZeroes"/>
+            <TextBox x:Name="TextBox_LastLevelMilliseconds" HorizontalAlignment="Left" Margin="182,139,0,0" TextWrapping="Wrap" Text="000" VerticalAlignment="Top" Width="32" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="3" PreviewTextInput="PreviewTextInt" GotFocus="txtBlankIfZeroFocus" LostFocus="txtLostFocusThreeZeroes"/>
             <Button x:Name="Button_TimersSetLastLevel" Content="Set" HorizontalAlignment="Left" Margin="224,139,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Click="Button_TimersSetLastLevel_Click" Width="53" Height="22"/>
             <Button x:Name="Button_TimerResetLastLevel" Content="Reset" HorizontalAlignment="Left" Margin="288,139,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Click="Button_TimerResetLastLevel_Click" Width="59" Height="22"/>
             <!--Total Time-->
             <Label x:Name="Label_Total" Content="Total" HorizontalAlignment="Left" Margin="3,163,0,0" VerticalAlignment="Top" FontSize="18" Height="38" Width="74" HorizontalContentAlignment="Center" Foreground="White" FontWeight="Bold" FontStyle="Italic"/>
-            <TextBox x:Name="TextBox_TotalHours" HorizontalAlignment="Left" Margin="68,171,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="38" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="4" PreviewTextInput="TextBox_TotalHours_PreviewTextInput" GotFocus="TextBox_TotalHours_GotFocus" LostFocus="TextBox_TotalHours_LostFocus"/>
-            <TextBox x:Name="TextBox_TotalMinutes" HorizontalAlignment="Left" Margin="115,171,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="24" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="2" PreviewTextInput="TextBox_TotalMinutes_PreviewTextInput" GotFocus="TextBox_TotalMinutes_GotFocus" LostFocus="TextBox_TotalMinutes_LostFocus"/>
-            <TextBox x:Name="TextBox_TotalSeconds" HorizontalAlignment="Left" Margin="149,171,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="24" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="2" PreviewTextInput="TextBox_TotalSeconds_PreviewTextInput" GotFocus="TextBox_TotalSeconds_GotFocus" LostFocus="TextBox_TotalSeconds_LostFocus"/>
-            <TextBox x:Name="TextBox_TotalMilliseconds" HorizontalAlignment="Left" Margin="182,171,0,0" TextWrapping="Wrap" Text="000" VerticalAlignment="Top" Width="32" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="3" PreviewTextInput="TextBox_TotalMilliseconds_PreviewTextInput" GotFocus="TextBox_TotalMilliseconds_GotFocus" LostFocus="TextBox_TotalMilliseconds_LostFocus"/>
+            <TextBox x:Name="TextBox_TotalHours" HorizontalAlignment="Left" Margin="68,171,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="38" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="4" PreviewTextInput="PreviewTextInt" GotFocus="txtBlankIfZeroFocus" LostFocus="txtLostFocusOneZero"/>
+            <TextBox x:Name="TextBox_TotalMinutes" HorizontalAlignment="Left" Margin="115,171,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="24" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="2" PreviewTextInput="PreviewTextInt" GotFocus="txtBlankIfZeroFocus" LostFocus="txtLostFocusTwoZeroes"/>
+            <TextBox x:Name="TextBox_TotalSeconds" HorizontalAlignment="Left" Margin="149,171,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="24" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="2" PreviewTextInput="PreviewTextInt" GotFocus="txtBlankIfZeroFocus" LostFocus="txtLostFocusTwoZeroes"/>
+            <TextBox x:Name="TextBox_TotalMilliseconds" HorizontalAlignment="Left" Margin="182,171,0,0" TextWrapping="Wrap" Text="000" VerticalAlignment="Top" Width="32" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="3" PreviewTextInput="PreviewTextInt" GotFocus="txtBlankIfZeroFocus" LostFocus="txtLostFocusThreeZeroes"/>
             <Button x:Name="Button_TimersStartStop" Content="Start Timer" HorizontalAlignment="Left" Margin="21,9,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Click="Button_TimersStartStop_Click" Width="193" Height="28" Background="Lime" Style="{StaticResource NoHoverButtonStyle}"/>
             <Button x:Name="Button_TimersSetTotal" Content="Set" HorizontalAlignment="Left" Margin="224,171,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Click="Button_TimersSetTotal_Click" Width="53" Height="22"/>
             <Button x:Name="Button_TimerResetTotal" Content="Reset" HorizontalAlignment="Left" Margin="288,171,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Click="Button_TimerResetTotal_Click" Width="59" Height="22"/>
             <!--All Time-->
             <Button x:Name="Button_TimersSetAll" Content="Set&#xD;&#xA;All" HorizontalAlignment="Left" Margin="357,108,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="12" Click="Button_TimersSetAll_Click" Width="58" Height="38" FontStyle="Italic"/>
             <Button x:Name="Button_TimerResetAll" Content="Reset&#xD;&#xA;  All" HorizontalAlignment="Left" Margin="357,154,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="12" Click="Button_TimerResetAll_Click" Width="58" Height="38" FontStyle="Italic"/>
-            <CheckBox x:Name="CheckBox_StartTimerAutomatically" IsChecked="False" Content="Auto-Start Timer?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="254,3,0,0" Foreground="White" FontSize="14" FontWeight="Bold" Checked="CheckBox_AutoStartTimer_Checked" Unchecked="CheckBox_AutoStartTimer_Unchecked"/>
+            <CheckBox x:Name="CheckBox_StartTimerAutomatically" IsChecked="False" Content="Auto-Start Timer?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="254,3,0,0" Foreground="White" FontSize="14" FontWeight="Bold" Checked="CheckBox_AutoStartTimer_Toggle" Unchecked="CheckBox_AutoStartTimer_Toggle"/>
             <!--Exit Counts-->
-            <CheckBox x:Name="CheckBox_ShowSwitchExits" IsChecked="False" Content="Show Switch Exits?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="254,21,0,0" Foreground="White" FontSize="14" FontWeight="Bold" Checked="CheckBox_ShowSwitchExits_Checked" Unchecked="CheckBox_ShowSwitchExits_Unchecked"/>
-            <TextBox x:Name="TextBox_ExitCountTotal_Manual" HorizontalAlignment="Left" Margin="254,43,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="38" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="3"/>
-            <TextBox x:Name="TextBox_ExitCountCurrent_Manual" HorizontalAlignment="Left" Margin="254,72,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="38" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="3"/>
+            <CheckBox x:Name="CheckBox_ShowSwitchExits" IsChecked="False" Content="Show Switch Exits?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="254,21,0,0" Foreground="White" FontSize="14" FontWeight="Bold" Checked="CheckBox_ShowSwitchExits_Toggle" Unchecked="CheckBox_ShowSwitchExits_Toggle"/>
+            <TextBox x:Name="TextBox_ExitCountTotal_Manual" GotFocus="txtBlankIfZeroFocus" PreviewTextInput="PreviewTextInt" HorizontalAlignment="Left" Margin="254,43,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="38" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="3"/>
+            <TextBox x:Name="TextBox_ExitCountCurrent_Manual" GotFocus="txtBlankIfZeroFocus" PreviewTextInput="PreviewTextInt" HorizontalAlignment="Left" Margin="254,72,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="38" FontSize="14" Height="22" TextAlignment="Center" MaxLines="1" MaxLength="3"/>
             <Button x:Name="Button_SetTotalExits" Content="Set Total Exits" HorizontalAlignment="Left" Margin="297,43,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Click="Button_SetTotalExits_Click" Width="118" Height="22"/>
             <Button x:Name="Button_SetCurrentExits" Content="Set Current Exits" HorizontalAlignment="Left" Margin="297,72,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Click="Button_SetCurrentExits_Click" Width="118" Height="22"/>
             <!--Hack Data-->
             <Label x:Name="Label_HackName" Content="Hack Name" HorizontalAlignment="Left" Margin="14,199,0,0" VerticalAlignment="Top" FontSize="20" Height="52" Width="148" Foreground="White"/>
-            <TextBox x:Name="TextBox_HackName" HorizontalAlignment="Left" Margin="17,235,0,0" Text="[Enter Hack Name Here]" VerticalAlignment="Top" Width="642" FontSize="20" Height="32" MaxLines="1" Foreground="DarkGray" GotFocus="TextBox_HackName_GotFocus"/>
+            <TextBox x:Name="TextBox_HackName" HorizontalAlignment="Left" Margin="17,235,0,0" Text="[Enter Hack Name Here]" VerticalAlignment="Top" Width="418" FontSize="20" Height="32" MaxLines="1" Foreground="DarkGray" GotFocus="TextBox_HackName_GotFocus"/>
+            <Label x:Name="Label_CreatorName" Content="Creator Name" HorizontalAlignment="Left" Margin="442,199,0,0" VerticalAlignment="Top" FontSize="20" Height="52" Width="148" Foreground="White"/>
+            <TextBox x:Name="TextBox_CreatorName" HorizontalAlignment="Left" Margin="445,235,0,0" Text="[Optional Author]" VerticalAlignment="Top" Width="214" FontSize="20" Height="32" MaxLines="1" Foreground="DarkGray" GotFocus="TextBox_CreatorName_GotFocus"/>
             <Button x:Name="Button_UpdateHackInfo" Content="Update Hack Info" HorizontalAlignment="Left" Margin="17,276,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Click="Button_UpdateHackInfo_Click" Width="138" Height="31"/>
             <Button x:Name="Button_GetHackData" Content="See Hack Data" HorizontalAlignment="Left" Margin="164,276,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Click="Button_GetHackData_Click" Width="125" Height="31"/>
             <!--WebSocket-->
-            <Button x:Name="Button_Connect" Content="Connect to WebSocket" HorizontalAlignment="Left" Margin="495,279,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Click="Button_Connect_Click" Width="164" Height="25"/>
-            <TextBlock x:Name="TextBlock_Connection" HorizontalAlignment="Left" Margin="427,304,0,0" VerticalAlignment="Top" Height="20" Width="232" FontSize="12" FontWeight="Bold" Foreground="White" Text="" TextAlignment="Right"/>
+            <!--<Button x:Name="Button_Connect" Content="Connect to WebSocket" HorizontalAlignment="Left" Margin="495,279,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Click="Button_Connect_Click" Width="164" Height="25"/>-->
+            <TextBlock x:Name="TextBlock_Connection" HorizontalAlignment="Left" Margin="427,304,0,0" VerticalAlignment="Top" Height="20" Width="232" FontSize="12" FontWeight="Bold" Foreground="White" Text="No Device Found" TextAlignment="Right"/>
             <Button x:Name="Button_ManualSplit" Content="Level Complete (Manual Split)" HorizontalAlignment="Left" Margin="21,49,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="12" Click="Button_ManualSplit_Click" Width="193" Height="28" Background="Cyan" Style="{StaticResource NoHoverButtonStyle}"/>
+            <CheckBox x:Name="CheckBox_TrackDeaths" IsChecked="False" Content="Track Deaths?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="453,145,0,0" Foreground="White" FontSize="14" FontWeight="Bold" Checked="CheckBox_TrackDeaths_Toggle" Unchecked="CheckBox_TrackDeaths_Toggle"/>
+            <CheckBox x:Name="CheckBox_TrackExits" IsChecked="False" Content="Track Exit Count?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="453,174,0,0" Foreground="White" FontSize="14" FontWeight="Bold" Checked="CheckBox_TrackExits_Toggle" Unchecked="CheckBox_TrackExits_Toggle"/>
+            <TextBlock x:Name="TextBlock_QUsb2Snes" HorizontalAlignment="Left" Margin="427,282,0,0" VerticalAlignment="Top" Height="20" Width="232" FontSize="12" FontWeight="Bold" Foreground="#FFFD0000" Text="QUsb2Snes is not running" TextAlignment="Right"/>
         </Grid>
         <!--Information Footer-->
         <Grid x:Name="GridFooter" Grid.Row="5" Background="#AA2A2A2A">
-            <TextBlock x:Name="TextBlock_Footer" HorizontalAlignment="Left" Text="" VerticalAlignment="Center" FontSize="12" Foreground="Black" Margin="2,0,0,0" FontWeight="Bold"/>
+            <TextBlock x:Name="TextBlock_Footer" HorizontalAlignment="Left" Text="Not Connected to WebSocket" VerticalAlignment="Center" FontSize="12" Foreground="Black" Margin="2,0,0,0" FontWeight="Bold"/>
         </Grid>
     </Grid>
 </Window>
