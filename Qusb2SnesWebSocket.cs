@@ -127,10 +127,6 @@ namespace SMW_Data
         }
         public void Initialize()
         {
-            //if (ws != null && _isConnecting && _lastConnectTime.AddSeconds(5) > DateTime.Now)
-            //{
-            //    return;                
-            //}
             if(ws != null)
                 ((IDisposable)ws).Dispose(); 
             ws = new WebSocket("ws://localhost:8080");
@@ -209,6 +205,7 @@ namespace SMW_Data
                     if (Device != null)
                     {
                         ws.Send(AddressRequest);
+                        waiting = true;
                     } else if(!waiting)
                     {
                         HandleOpen(null, null);
@@ -223,27 +220,6 @@ namespace SMW_Data
                     break;
 
             }
-            //if (ws.ReadyState == WebSocketState.Open) {
-            //    if (Device != null)
-            //    {
-            //        ws.Send(AddressRequest);
-            //    }
-            //}
-            //if(Device == null && !(_isConnecting && _lastConnectTime.AddSeconds(5) > DateTime.Now))
-            //{
-            //    waiting = false;
-            //    Initialize();
-            //    return;
-            //}
-            //if(Device != null && waiting && _LastMessageTime.AddSeconds(5)<  DateTime.Now) {
-            //    waiting = false;
-            //}
-            //if (Device != null && !waiting && ws.ReadyState == WebSocketState.Open)
-            //{              
-                
-            //    ws.Send(AddressRequest);
-            //    waiting = true;
-            //}
         }
         internal void Stop()
         {
