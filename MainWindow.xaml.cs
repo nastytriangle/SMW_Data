@@ -147,7 +147,7 @@ namespace SMW_Data
                 {
                     int currentExitCount = _ExitCount;
                     _ExitCount = value;
-                    if(currentExitCount+ 1 == _ExitCount && timer.IsEnabled)
+                    if(currentExitCount+ 1 == _ExitCount && timer?.IsEnabled == true)
                     {
                         Button_ManualSplit_Click(null, null);
                     }
