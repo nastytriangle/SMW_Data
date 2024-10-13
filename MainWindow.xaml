@@ -62,19 +62,19 @@
             </Menu>
         </Grid>
         <!--Main Window-->
-        <Grid x:Name="GridHackName" Grid.Row="1" Background="Transparent" Margin="0,-1,0,0">
+        <Grid x:Name="GridHackName" Grid.Row="1" Background="#FF463F3F" Margin="0,-1,0,0">
             <!--Hack Name-->
             <Viewbox x:Name="Viewbox_Hack" HorizontalAlignment="Center" Margin="10,0,10,0" VerticalAlignment="Bottom" Height="80">
                 <Label x:Name="Label_Hack" Content="Hack Name" FontSize="72" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Bottom" />
             </Viewbox>
         </Grid>
-        <Grid x:Name="GridCreators" Grid.Row="2" Background="Transparent" Margin="0,-1,0,0">
+        <Grid x:Name="GridCreators" Grid.Row="2" Background="#FF463F3F" Margin="0,-1,0,0">
             <!--Creator(s)-->
             <Viewbox x:Name="Viewbox_Creator" HorizontalAlignment="Center" Margin="10,0,10,0" VerticalAlignment="Top" Height="60">
                 <Label x:Name="Label_Creator" Content="By: Creator(s)" FontSize="64" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top"/>
             </Viewbox>
         </Grid>
-        <Grid x:Name="GridMain" Grid.Row="3" Background="Transparent">
+        <Grid x:Name="GridMain" Grid.Row="3" Background="#FF463F3F">
             <Grid.RowDefinitions>
                 <RowDefinition Height="73*"/>
                 <RowDefinition Height="32*"/>
