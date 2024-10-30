@@ -19,10 +19,11 @@ namespace SMW_Data
     internal class TrackedMemory
     {
         const int ADJUSTMENT = 0x770000; //0xF50000 - 0x7E0000
+        private int _MemoryAddress;
         public SNESMemoryAddress Address;
         public string RequestAddress()
         {
-            return ((int)Address + ADJUSTMENT).ToString("X");
+            return (_MemoryAddress + ADJUSTMENT).ToString("X");
         }
         private int _byteLength = 1;
         public int ByteLength
@@ -38,6 +39,7 @@ namespace SMW_Data
 
         public TrackedMemory(SNESMemoryAddress address) {
             Address = address;
+            _MemoryAddress = (Int32)Address;
             switch (Address)
             {
                 case SNESMemoryAddress.ButtonsDown:                                        
@@ -46,6 +48,12 @@ namespace SMW_Data
                     break;
             }
         }
+        public TrackedMemory(int memoryAddress, int byteLength)
+        {
+            _MemoryAddress = memoryAddress;            
+            _byteLength = byteLength;            
+        }
+
         public string[] AsOperands()
         {
             return new string[] { RequestAddress(), _byteLength.ToString() };

@@ -122,8 +122,14 @@ namespace SMW_Data
             waiting = true;
             ws.Send(JsonConvert.SerializeObject(deviceListRequest));
         }
-        private void HandleClose(object? sender, CloseEventArgs e) {                        
+        protected void HandleClose(object? sender, CloseEventArgs e) {                        
             Device = null;
+            HandleDisconnect();
+        }
+        protected virtual void HandleDisconnect()
+        {
+            //No action required.
+            return;
         }
         public void Initialize()
         {
@@ -184,7 +190,7 @@ namespace SMW_Data
             };
             return JsonConvert.SerializeObject(getAddressRequestObject);
         }
-        public void StartTimer()
+        public virtual void StartTimer()
         {
             Timer = new Timer(TimerTick, null, CheckFrequency, Timeout.Infinite);
         }
@@ -194,7 +200,7 @@ namespace SMW_Data
             {
                 Stopwatch watch = new Stopwatch();
                 RequestData();                
-                Timer.Change(Math.Max(0, CheckFrequency - watch.ElapsedMilliseconds), Timeout.Infinite);
+                Timer?.Change(Math.Max(0, CheckFrequency - watch.ElapsedMilliseconds), Timeout.Infinite);
             }
         }
         public void RequestData()
@@ -206,7 +212,7 @@ namespace SMW_Data
                     {
                         ws.Send(AddressRequest);
                         waiting = true;
-                    } else if(!waiting)
+                    } else if(!waiting || DateTime.Now.AddMinutes(-1) > _LastMessageTime)
                     {
                         HandleOpen(null, null);
                     }

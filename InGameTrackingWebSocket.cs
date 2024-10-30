@@ -29,6 +29,10 @@ namespace SMW_Data
             _connectedCheckFrequency = 1000;
             _disconnectedCheckFrequency = 16;
         }
+        protected override void HandleDisconnect()
+        {
+            IsInGame = false;
+        }
         protected override void NoteResponses()
         {            
             IsInGame = _lastResponse == "02";

@@ -36,6 +36,7 @@ namespace SMW_Data
                 if (_deathTrackingWebSocket != null)
                 {
                     _deathTrackingWebSocket.CurrentLevelDeaths = value;
+                    LevelDeathCount = value;
                 }
                 else
                 {
@@ -94,8 +95,7 @@ namespace SMW_Data
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            StartTimer();
-                            //CheckBox_StartTimerAutomatically.IsChecked = false;
+                            StartTimer();                            
                         });
                     }
                 }
@@ -147,9 +147,13 @@ namespace SMW_Data
                 {
                     int currentExitCount = _ExitCount;
                     _ExitCount = value;
-                    if(currentExitCount+ 1 == _ExitCount && timer?.IsEnabled == true)
+                    if(currentExitCount+ 1 == _ExitCount && timer?.IsEnabled == true && TrackExits)
                     {
                         Button_ManualSplit_Click(null, null);
+                    }
+                    if(TrackDeaths)
+                    {
+                        TrackedLevelDeathCounter = 0;
                     }
                     Application.Current.Dispatcher.Invoke(() =>
                     {
@@ -384,7 +388,7 @@ namespace SMW_Data
             //SetUpWebSockets();            
             Closing += MainWindow_Closing;
             timerAutoSave = new Timer(DoAutoSave, null, 100, Timeout.Infinite);
-            _updateDisplayTimer = new Timer(UpdateDisplay, null, 10, Timeout.Infinite);
+            _updateDisplayTimer = new Timer(UpdateDisplay, null, 10, Timeout.Infinite);            
         }
         private void StartSocket(Qusb2SnesWebSocket socket)
         {
@@ -417,7 +421,7 @@ namespace SMW_Data
             }
             if(_trackInGame)
             {
-               IsInGame = _inGameTrackingWebSocket.IsInGame;
+               IsInGame = _inGameTrackingWebSocket.IsInGame && connected is not null;
             }    
             if(_trackExits)
             {
@@ -578,7 +582,7 @@ namespace SMW_Data
 
                 SetManualTimerUIVisibility(Visibility.Visible);                
                 timer.Stop();
-                TrackInGame = false;    
+                //TrackInGame = false;    
                 IsInGame = false;
 
                 GetCurrentTimeTotal();
@@ -821,7 +825,7 @@ namespace SMW_Data
         }
         private void Button_SetCurrentExits_Click(object sender, RoutedEventArgs e)
         {
-            TextBlock_ExitCountCurrent.Text = TextBox_ExitCountCurrent_Manual.Text;
+            ExitCount = Int32.Parse(TextBox_ExitCountCurrent_Manual.Text);
         }
         private void CheckBox_ShowSwitchExits_Toggle(object sender, RoutedEventArgs e)
         {
@@ -875,12 +879,24 @@ namespace SMW_Data
         }
         private void Button_ManualSplit_Click(object sender, RoutedEventArgs e)
         {
+            if (TrackExits)
+                return;
             Application.Current.Dispatcher.BeginInvoke(() =>
             {
-                TrackedLevelDeathCounter = 0;                
-                UpdateTimeText(TextBlock_LastLevelTime, GetTimeSpan(TextBlock_LevelTime.Text), SelectedLevelAccuracyIndex, 12);                                
+                ExitCount++;
+                TrackedLevelDeathCounter = 0;
+                UpdateTimeText(TextBlock_LastLevelTime, GetTimeSpan(TextBlock_LevelTime.Text), SelectedLevelAccuracyIndex, 12);
                 UpdateTimeText(TextBlock_LevelTime, TimeSpan.Zero, SelectedLevelAccuracyIndex);
-            });            
+                if (timer?.IsEnabled == true)
+                {
+                    if (TextBlock_ExitCountCurrent.Text == TextBlock_ExitCountTotal.Text)
+                    {
+                        Button_TimersStartStop_Click(sender, e);
+                    }
+                }
+
+            });
+            currentTimeLevel = TimeSpan.Zero;
             startTimeLevel = DateTime.Now;
         }
         private void MenuItem_Click_Fonts(object sender, RoutedEventArgs e)
@@ -1097,6 +1113,7 @@ namespace SMW_Data
             TextBox_CreatorName.Foreground = new SolidColorBrush(Colors.DarkGray);
             Label_Hack.Content = "HackName";
             Label_Creator.Content = "Author";
+            IsDirty = true;
         }
         private void CheckBox_AutoStartTimer_Toggle(object sender, RoutedEventArgs e)
         {
@@ -1132,6 +1149,7 @@ namespace SMW_Data
                 Label_Creator.Content = "By: " + hackData[1];
                 TextBlock_ExitCountTotal.Text = hackData[2];
             }
+            IsDirty = true;
         }
         private async void Button_GetHackData_Click(object sender, RoutedEventArgs e)
         {
